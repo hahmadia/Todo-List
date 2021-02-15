@@ -1,3 +1,3 @@
-import PostgresProvider from "./PostgresProvider";
+import db from "./db";
 
-export default PostgresProvider;
+export default db;
