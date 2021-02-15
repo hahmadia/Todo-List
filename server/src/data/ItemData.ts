@@ -1,7 +1,7 @@
 import db from "@src/config";
 
 export interface Item {
-  id: number;
+  id: number | string;
   item: string;
 }
 
@@ -27,10 +27,13 @@ class ItemData {
     return itemUpdated;
   };
 
-  public deleteItem = async (id: number) => {
-    const numberOfItemsDeleted = await db("items").where({ id }).delete();
+  public deleteItem = async (id: string) => {
+    const numberOfItemsDeleted = await db("items")
+      .where({ id })
+      .delete()
+      .catch((err) => err);
 
-    return numberOfItemsDeleted == 1;
+    return numberOfItemsDeleted > 0;
   };
 }
 

@@ -18,7 +18,7 @@ class ItemController {
     return updatedItem;
   };
 
-  public deleteItem = async (id: number) => {
+  public deleteItem = async (id: string) => {
     const itemDeleted = await ItemData.deleteItem(id);
 
     return itemDeleted;

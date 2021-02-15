@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "tsc && node dist/src/app.js",
-    "dev": "nodemon"
+    "start": "npm run migrate && node dist/src/app.js",
+    "dev": "nodemon",
+    "migrate": "npm run build && knex migrate:latest --knexfile dist/src/config/knexfile.js",
+    "migrate-undo": "npm run build && knex migrate:down --knexfile dist/src/config/knexfile.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,7 @@
     "@src": "dist/src/"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.17",
     "module-alias": "^2.2.2",
