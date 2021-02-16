@@ -1,17 +1,12 @@
 import db from "@src/config";
-
-export interface Item {
-  id: number | string;
-  item: string;
-}
-
+import { Item, CreateItem } from "@src/types/ItemTypes";
 class ItemData {
   public getItems = async () => {
     const items = (await db("items").select(["id", "item"])) as Item[];
     return items;
   };
 
-  public createItem = async (item: Item) => {
+  public createItem = async (item: CreateItem) => {
     const itemCreated = await db("items")
       .insert(item)
       .returning(["id", "item"])

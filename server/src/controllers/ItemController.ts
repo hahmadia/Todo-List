@@ -1,5 +1,5 @@
 import { ItemData } from "@src/data";
-import { Item } from "@src/data/ItemData";
+import { Item, CreateItem } from "@src/types/ItemTypes";
 
 class ItemController {
   public getItems = async () => {
@@ -7,7 +7,7 @@ class ItemController {
     return data;
   };
 
-  public createItem = async (item: Item) => {
+  public createItem = async (item: CreateItem) => {
     const createdItem = await ItemData.createItem(item);
     return createdItem;
   };
