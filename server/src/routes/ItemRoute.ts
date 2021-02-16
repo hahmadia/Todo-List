@@ -20,7 +20,7 @@ router.post(
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(402).json({ errors: errors.array() });
+      return res.status(404).json({ errors: errors.array() });
     }
 
     const item: CreateItem = {
@@ -46,7 +46,7 @@ router.put(
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(402).json({ errors: errors.array() });
+      return res.status(404).json({ errors: errors.array() });
     }
 
     const { id } = req.params;
@@ -55,6 +55,17 @@ router.put(
       id,
     };
     const updatedItem = await ItemController.updateItem(item);
+
+    if (updatedItem.length == 0) {
+      res.status(404).json({
+        errors: [
+          {
+            msg: "This item does not exist",
+          },
+        ],
+      });
+    }
+
     res.send(updatedItem);
   }
 );
@@ -69,12 +80,23 @@ router.delete(
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(402).json({ errors: errors.array() });
+      return res.status(404).json({ errors: errors.array() });
     }
 
     const { id } = req.params;
     const itemDeleted = await ItemController.deleteItem(id);
-    res.send(itemDeleted);
+
+    if (!itemDeleted) {
+      res.status(404).json({
+        errors: [
+          {
+            msg: "This item does not exist",
+          },
+        ],
+      });
+    }
+
+    res.send({ success: true });
   }
 );
 
