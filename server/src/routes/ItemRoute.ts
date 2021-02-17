@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
   const data = await ItemController.getItems();
-  res.send(data);
+  return res.send(data);
 });
 
 router.post(
@@ -27,7 +27,7 @@ router.post(
       item: req.body.item as string,
     };
     const createdItem = await ItemController.createItem(item);
-    res.send(createdItem[0]);
+    return res.send(createdItem[0]);
   }
 );
 
@@ -57,7 +57,7 @@ router.put(
     const updatedItem = await ItemController.updateItem(item);
 
     if (updatedItem.length == 0) {
-      res.status(404).json({
+      return res.status(404).json({
         errors: [
           {
             msg: "This item does not exist",
@@ -66,7 +66,7 @@ router.put(
       });
     }
 
-    res.send(updatedItem);
+    return res.send(updatedItem);
   }
 );
 
@@ -87,7 +87,7 @@ router.delete(
     const itemDeleted = await ItemController.deleteItem(id);
 
     if (!itemDeleted) {
-      res.status(404).json({
+      return res.status(404).json({
         errors: [
           {
             msg: "This item does not exist",
@@ -96,7 +96,7 @@ router.delete(
       });
     }
 
-    res.send({ success: true });
+    return res.send({ success: true });
   }
 );
 
