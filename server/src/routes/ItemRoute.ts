@@ -27,7 +27,7 @@ router.post(
       item: req.body.item as string,
     };
     const createdItem = await ItemController.createItem(item);
-    res.send(createdItem);
+    res.send(createdItem[0]);
   }
 );
 
