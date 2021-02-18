@@ -1,11 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 
-function App() {
-  return (
+import Navbar from "components/Navbar/Navbar";
 
-  );
-}
+const App = () => {
+    return (
+        <>
+            <Navbar />
+        </>
+    );
+};
 
 export default App;

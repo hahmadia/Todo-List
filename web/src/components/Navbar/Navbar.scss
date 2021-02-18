@@ -1,0 +1,42 @@
+.Navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.Navbar_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 1000px;
+    padding-top: 2rem;
+
+    img {
+        cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+        color: #858586;
+        font-weight: 600;
+        padding: 0.7rem 1.5rem;
+        border-radius: 0.7rem;
+        transition: all 0.2s ease-in;
+
+        &:hover {
+            color: #7781d4;
+            background: #e7e9fc;
+            cursor: pointer;
+        }
+    }
+}
+
+// .Navbar_links_container {
+//     display: flex;
+//     max-width: 200px;
+//     justify-content: space-between;
+// }
